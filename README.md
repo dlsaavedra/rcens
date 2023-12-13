@@ -1,4 +1,4 @@
-# rcens
+# rcens Package
 
 This package provides functions to generate censored samples of type I, II and III, from any random sample generator. It also provides the option to create left and right censorship
 Along with this, the generation of samples with interval censoring is in the testing phase. With two options of fixed length intervals and random lengths.
