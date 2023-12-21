@@ -6,7 +6,7 @@ library(ggplot2)
 
 # Example rcensI ------
 
-Salida = rcensI(rdistrX = rexp, rdistrC = runif,
+Data = rcensI(rdistrX = rexp, rdistrC = runif,
                 param_X = list("rate" = .5),
                 param_C = list("min" = 0, "max" = 1),
                 n = 1e02, theta = .9)
@@ -14,21 +14,21 @@ Salida = rcensI(rdistrX = rexp, rdistrC = runif,
 
 ## Plot Intervalar Censoring Data ------
 
-color_linea = "#E14D2A"
-color_punto_i = "#8B2323"
-color_punto_f = "#3E6D9C"
-color_punteo = "#008B00"
+color_line = "#E14D2A"
+color_point_i = "#8B2323"
+color_point_f = "#3E6D9C"
+color_pt = "#008B00"
 
-A = data.frame(Salida$sample_censored)
+A = data.frame(Data$sample_censored)
 A  %>%
   select(Lower,Upper) %>%
   arrange(Lower, Upper) %>%
   mutate(inicio = 0,index = desc(row_number())) %>%
   ggplot() +
-  geom_segment(aes(x=inicio,y=index,xend=Lower,yend=index),color=color_linea)+
-  geom_segment(aes(x=Lower,y=index,xend=Upper,yend=index),color=color_punteo,linetype="dashed")+
-  geom_point(aes(x=Lower,y=index),color=color_punto_i)+
-  geom_point(aes(x=Upper,y=index),color=color_punto_f)+
+  geom_segment(aes(x=inicio,y=index,xend=Lower,yend=index),color=color_line)+
+  geom_segment(aes(x=Lower,y=index,xend=Upper,yend=index),color=color_pt,linetype="dashed")+
+  geom_point(aes(x=Lower,y=index),color=color_point_i)+
+  geom_point(aes(x=Upper,y=index),color=color_point_f)+
 
   theme(
     plot.title = element_text(color="black", hjust = 0.5, size = rel(4)),

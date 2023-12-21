@@ -7,17 +7,17 @@ scale = beta ** (-1/alpha )
 theta = .5
 
 ## Right-Censored Plot KM
-Salida = rcensT3(rdistrX = rweibull, pdistrC = punif, rdistrC = runif,
+Data = rcensT3(rdistrX = rweibull, pdistrC = punif, rdistrC = runif,
               param_X = list("shape" = alpha, "scale" = scale ),
              param_C = list("min" = 0, "max" = "lambda"),
              n = 1e03, theta = theta, n_mc = 1e04, right = TRUE)
 
-S = Surv(Salida$sample_censored,Salida$censored_indicator, type = "right")
+S = Surv(Data$sample_censored,Data$censored_indicator, type = "right")
 s1 = survfit(S ~ 1)
 
-CDF_censored = ecdf(Salida$sample_censored)
+CDF_censored = ecdf(Data$sample_censored)
 Survival_CDF = Vectorize(function(x){ 1 - CDF_censored(x)})
-CDF_original= ecdf(Salida$sample_uncensored)
+CDF_original= ecdf(Data$sample_uncensored)
 Survival_CDF_original = Vectorize(function(x){ 1 - CDF_original(x)})
 
 plot(Survival_CDF, col = "blue", xlim = c(0,2))
@@ -29,17 +29,17 @@ legend("topright",c("original","censured", "Survival_KM"),
 
 
 ## Left-Censored Plot KM
-Salida = rcensT3(rdistrX = rweibull, pdistrC = punif, rdistrC = runif,
+Data = rcensT3(rdistrX = rweibull, pdistrC = punif, rdistrC = runif,
                  param_X = list("shape" = alpha, scale = scale ),
                  param_C = list("min" = 0, "max" = "lambda"),
                  n = 1e03, theta = theta, n_mc = 1e04, right = FALSE)
 
-S = Surv(Salida$sample_censored,Salida$censored_indicator, type = "left")
+S = Surv(Data$sample_censored,Data$censored_indicator, type = "left")
 s1 = survfit(S ~ 1)
 
-CDF_censored = ecdf(Salida$sample_censored)
+CDF_censored = ecdf(Data$sample_censored)
 Survival_CDF = Vectorize(function(x){ 1 - CDF_censored(x)})
-CDF_original= ecdf(Salida$sample_uncensored)
+CDF_original= ecdf(Data$sample_uncensored)
 Survival_CDF_original = Vectorize(function(x){ 1 - CDF_original(x)})
 
 plot(Survival_CDF, col = "blue", xlim = c(0,2))
