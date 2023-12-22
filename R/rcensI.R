@@ -26,6 +26,7 @@ source("R/tools.R")
 #'    \code{sample_uncensored} \tab vector of uncensored sample (original) \cr
 #'    \tab \cr
 #'    \code{censored_indicator} \tab vector of 1 and 0 indicating whether the i-th sample is censored  \cr
+#'    \tab 1:= no censored, 0:= censored \cr
 #'    \code{n_censored} \tab number of censored samples  \cr
 #' }
 #'

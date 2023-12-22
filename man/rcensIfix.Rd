@@ -34,6 +34,7 @@ A list with sample data information: \tabular{ll}{
    \code{sample_uncensored} \tab vector of uncensored sample (original) \cr
    \tab \cr
    \code{censored_indicator} \tab vector of 1 and 0 indicating whether the i-th sample is censored  \cr
+   \tab 1:= no censored, 0:= censored \cr
    \code{n_censored} \tab number of censored samples  \cr
 }
 }
@@ -46,7 +47,7 @@ Generator of interval censored samples where the length of interval is fixed,
 \examples{
 #Example Exponential - Uniform
 
-Salida = rcensIfix(rdistrX = rexp, interval_length = 2,
+Data_Ifix = rcensIfix(rdistrX = rexp, interval_length = 2,
                    param_X = list("rate" = .5),
                    n = 1e02, theta = .9)
 

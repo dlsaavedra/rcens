@@ -1,11 +1,16 @@
-#' @title Generate Censoring Sample,Type III (Random)
+#source("R/rcuref.R")
+
+#' Title Generate Sample with Cure Fraction, Random Censoring
 #'
-#' @description
-#' Generator of censored samples type III with right or left censoring,
-#'  given a generator of samples of the distribution X (rdistrX) with
+#'@description
+#' Generator Sample with Cure Fraction, Random Censoring.
+#'  Given a generator of samples of the distribution X (rdistrX) with
 #'  parameters appended by the list param_X. Also accumulate function of distribution and generator sample
 #'  of distribution C (censoring) with parameters appended by the list param_C
 #'  In which, you can control the desired censorship percentage.
+#'  \cr
+#'  Note: cure fraction (p) must be less than desired censorship percentage.
+#'
 #'
 #' @param rdistrX sample generator of distribution X. \cr
 #' First argument number of samples, next arguments in param_X.
@@ -21,6 +26,7 @@
 #' @param tol_upper  uppest value where live the search parameter lambda.
 #' @param check if TRUE print a censoring percentage of new created database.
 #' @param right if TRUE create right-censored data, else create left-censored
+#' @param p cure fraction
 #'
 #' @return A list with sample data information: \tabular{ll}{
 #'    \code{lambda}\tab searched censoring distribution parameter.\cr
@@ -32,33 +38,44 @@
 #'      \tab 1:= no censored, 0:= censored \cr
 #'    \code{censored_time} \tab vector of censorship time. \cr
 #'    \code{n_censored} \tab number of censored samples.  \cr
+#'     \code{cure_list} \tab vector of 1 and 0 indicating whether the i-th sample is cured. \cr
+#'     \tab 1:= cure , 0:= no cure \cr
+#'    \code{cure_fraction} \tab cure fraction used to create de sample. \cr
+#'    \tab \cr
+
 #' }
 #'
-#' @seealso \code{\link{rcensT1}} for generate censorship sample type I.\cr
-#' \code{\link{rcensT2}} for generate censorship sample type II \cr
-#' \code{\link{rcensI}} for generate interval censoring sample
-#'  with random length interval\cr
-#' \code{\link{rcensIfix}} for generate interval censoring sample
-#'  with fix length interval
+#' @seealso \code{\link{rcuref}} Generate Sample with Cure Fraction.\cr
 #'
-#' @example man/examples/rcensT3.R
-## @example examples_plot/Example_rcensT3_plot.R
+#' @example man/examples/rcurefT3.R
+## @example examples_plot/Example_rcurefT3_plot.R
 #' @author Daniel Saavedra Morales
 #' @export
 
 
-rcensT3 <- function(rdistrX, pdistrC, rdistrC ,param_X, param_C,
-                  n = 1e04, theta = .5, n_mc = 1e04,
-                  tol_low = 1e-06, tol_upper = 1e04,
-                  check = TRUE, right= TRUE)
+rcurefT3 <- function(rdistrX, pdistrC, rdistrC ,param_X, param_C,
+                    p = 0.1 , n = 1e04, theta = .5, n_mc = 1e04,
+                    tol_low = 1e-06, tol_upper = 1e04,
+                    check = TRUE, right= TRUE)
 {
-
+  if (p > 1 || p < 0){
+    warning("p is not between 0 and 1 ")
+    return()
+  }
   if (theta > 1 || theta < 0){
     warning("theta is not between 0 and 1 ")
     return()
   }
+  if (p > theta ){
+    warning("p must be less than theta")
+    return()
+  }
+
   #Calculate the P(C < X) with Monte Carlo
-  sample_x_mc = do.call('rdistrX', c(n_mc, param_X))
+  sample_cf_mc = rcuref(rdistrX = rdistrX, param_X = param_X,
+                     n = n_mc, p = p)
+
+  sample_x_mc = sample_cf_mc$data_cf
 
   f<- function(lambda){
     param_C[param_C == "lambda"] = lambda
@@ -75,7 +92,10 @@ rcensT3 <- function(rdistrX, pdistrC, rdistrC ,param_X, param_C,
 
   #Create the new censored data
 
-  x = do.call('rdistrX', c(n, param_X))
+  sample_cf = rcuref(rdistrX = rdistrX, param_X = param_X,
+                     n = n, p = p)
+  x = sample_cf$data_cf
+
   param_C[param_C == "lambda"] = lambda_mc
   c = do.call("rdistrC",
               c(n, param_C))
@@ -83,7 +103,7 @@ rcensT3 <- function(rdistrX, pdistrC, rdistrC ,param_X, param_C,
   delta <- rep (0, n)
   t = x
   if (right){
-   delta[x<=c] = 1
+    delta[x<=c] = 1
     t[x>c] = c[x>c]
   }
   else{
@@ -98,5 +118,7 @@ rcensT3 <- function(rdistrX, pdistrC, rdistrC ,param_X, param_C,
               "sample_uncensored" = x,
               "censored_indicator" = delta,
               "censored_time" = c,
-              "n_censored" = sum (delta == 0) ))
+              "n_censored" = sum (delta == 0),
+              "cure_list" = sample_cf$cure_list,
+              "cure_fraction" = p))
 }
