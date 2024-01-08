@@ -1,5 +1,7 @@
 # rcens Package
 
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdlsaavedra%2Frcens&count_bg=%2379C83D&title_bg=%23555555&icon=rstudio.svg&icon_color=%23FFFFFF&title=Views&edge_flat=true)](https://hits.seeyoufarm.com)
+
 This package provides functions to generate censored samples of type I, II and III, from any random sample generator. It also provides the option to create left and right censorship
 Along with this, the generation of samples with interval censoring is in the testing phase. With two options of fixed length intervals and random lengths.
 
