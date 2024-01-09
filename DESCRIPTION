@@ -2,10 +2,14 @@ Package: rcens
 Type: Package
 Title: Generate Sample Censoring
 Version: 0.1.0
-Author: Daniel Saavedra Morales
-Maintainer: The package maintainer <dlsaavedra@uc.cl>
-Description: The "rcens" package provides functions to generate censored samples of type I, II and III, from any random sample generator. It also provides the option to create left and right censorship. Along with this, the generation of samples with interval censoring is in the  testing phase. With two options of fixed length intervals and random lengths.
-License: MIT License
+Authors@R: 
+    person("Daniel", "Saavedra", , "dlsaavedra@uc.cl", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-5084-6843"))
+Maintainer: Daniel Saavedra <dlsaavedra@uc.cl>
+Description: The rcens package provides functions to generate censored samples of type I, II and III, from any random sample generator. It also provides the option to create left and right censorship. Along with this, the generation of samples with interval censoring is in the  testing phase. With two options of fixed length intervals and random lengths.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
+URL: https://github.com/dlsaavedra/rcens
+BugReports: https://github.com/dlsaavedra/rcens/issues
