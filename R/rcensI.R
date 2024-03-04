@@ -43,7 +43,7 @@ source("R/tools.R")
 #' @export
 
 rcensI <- function(rdistrX, rdistrC ,param_X, param_C,
-                   n = 1e04, epsilon = .9, n_mc = 1e05,
+                   n = 1e04, epsilon = .5, n_mc = 1e04,
                    theta = 1, check = TRUE){
 
   n1 = ceiling(n*theta) # Data con censura
@@ -62,7 +62,7 @@ rcensI <- function(rdistrX, rdistrC ,param_X, param_C,
   delta = c(rep(1,n2), rep(0,n1))
 
   for (i in (n2 + 1):n){
-    n_interval = ceiling(root_x2_p((1-epsilon)*e_u^2, - epsilon*var_u, - x[i]^2))
+    n_interval = ceiling(root_x2_p((1-epsilon)*e_u^2, - (epsilon*var_u + 2*x[i]*e_u), - x[i]^2))
     u = c()
     while(sum(u) < x[i]){
       u = c(u, do.call('rdistrC', c(n_interval, param_C)))
