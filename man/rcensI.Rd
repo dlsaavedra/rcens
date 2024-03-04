@@ -10,10 +10,10 @@ rcensI(
   param_X,
   param_C,
   n = 10000,
-  epsilon = 0.9,
-  n_mc = 1e+05,
+  epsilon = 0.5,
+  n_mc = 10000,
   theta = 1,
-  check = TRUE
+  verbose = FALSE
 )
 }
 \arguments{
@@ -35,7 +35,7 @@ this wil be the searched parameter.}
 
 \item{theta}{Desired censoring percentage}
 
-\item{check}{if TRUE print a censoring percentage of new created database.}
+\item{verbose}{if TRUE print a censoring percentage of new created database.}
 }
 \value{
 A list with sample data information: \tabular{ll}{

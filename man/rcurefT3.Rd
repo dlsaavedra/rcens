@@ -2,7 +2,7 @@
 % Please edit documentation in R/rcurefT3.R
 \name{rcurefT3}
 \alias{rcurefT3}
-\title{Title Generate Sample with Cure Fraction, Random Censoring}
+\title{Title Generate Sample with Cure Fraction and Random Censoring}
 \usage{
 rcurefT3(
   rdistrX,
@@ -14,9 +14,8 @@ rcurefT3(
   n = 10000,
   theta = 0.5,
   n_mc = 10000,
-  tol_low = 1e-06,
-  tol_upper = 10000,
-  check = TRUE,
+  lambda_tol = c(1e-06, 10000),
+  verbose = FALSE,
   right = TRUE
 )
 }
@@ -41,11 +40,9 @@ this wil be the searched parameter.}
 
 \item{n_mc}{number of sample use in Monte Carlo integration, greater n_mc more accuracy.}
 
-\item{tol_low}{lowest value where live the search parameter lambda.}
+\item{lambda_tol}{lowest and uppest value where live the search parameter lambda.}
 
-\item{tol_upper}{uppest value where live the search parameter lambda.}
-
-\item{check}{if TRUE print a censoring percentage of new created database.}
+\item{verbose}{if TRUE print a censoring percentage of new created database.}
 
 \item{right}{if TRUE create right-censored data, else create left-censored}
 }
@@ -68,10 +65,11 @@ A list with sample data information: \tabular{ll}{
 }
 \description{
 Generator Sample with Cure Fraction, Random Censoring.
- given a generator of samples of the distribution X (rdistrX) with
+ Given a generator of samples of the distribution X (rdistrX) with
  parameters appended by the list param_X. Also accumulate function of distribution and generator sample
  of distribution C (censoring) with parameters appended by the list param_C
  In which, you can control the desired censorship percentage.
+ \cr
  Note: cure fraction (p) must be less than desired censorship percentage.
 }
 \examples{

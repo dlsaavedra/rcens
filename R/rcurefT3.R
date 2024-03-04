@@ -1,6 +1,6 @@
 #source("R/rcuref.R")
 
-#' Title Generate Sample with Cure Fraction, Random Censoring
+#' Title Generate Sample with Cure Fraction and Random Censoring
 #'
 #'@description
 #' Generator Sample with Cure Fraction, Random Censoring.
@@ -22,9 +22,8 @@
 #' @param n number of sample to create.
 #' @param theta Desired censoring percentage
 #' @param n_mc number of sample use in Monte Carlo integration, greater n_mc more accuracy.
-#' @param tol_low lowest value where live the search parameter lambda.
-#' @param tol_upper  uppest value where live the search parameter lambda.
-#' @param check if TRUE print a censoring percentage of new created database.
+#' @param lambda_tol lowest and uppest value where live the search parameter lambda.
+#' @param verbose if TRUE print a censoring percentage of new created database.
 #' @param right if TRUE create right-censored data, else create left-censored
 #' @param p cure fraction
 #'
@@ -55,9 +54,13 @@
 
 rcurefT3 <- function(rdistrX, pdistrC, rdistrC ,param_X, param_C,
                     p = 0.1 , n = 1e04, theta = .5, n_mc = 1e04,
-                    tol_low = 1e-06, tol_upper = 1e04,
-                    check = TRUE, right= TRUE)
+                    lambda_tol = c(1e-06, 1e04),
+                    verbose = FALSE, right= TRUE)
 {
+
+  tol_low = lambda_tol[1]
+  tol_upper = lambda_tol[2]
+
   if (p > 1 || p < 0){
     warning("p is not between 0 and 1 ")
     return()
@@ -111,7 +114,7 @@ rcurefT3 <- function(rdistrX, pdistrC, rdistrC ,param_X, param_C,
     t[x<c] = c[x<c]
   }
 
-  if (check){cat("Censorship percentage:",1 - (sum (delta) / n ))}
+  if (verbose){cat("Censorship percentage:",1 - (sum (delta) / n ))}
 
   return(list("lambda" = lambda_mc,
               "sample_censored" = t,

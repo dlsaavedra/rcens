@@ -13,9 +13,8 @@ rcensT3(
   n = 10000,
   theta = 0.5,
   n_mc = 10000,
-  tol_low = 1e-06,
-  tol_upper = 10000,
-  check = TRUE,
+  lambda_tol = c(1e-06, 10000),
+  verbose = FALSE,
   right = TRUE
 )
 }
@@ -38,11 +37,9 @@ this wil be the searched parameter.}
 
 \item{n_mc}{number of sample use in Monte Carlo integration, greater n_mc more accuracy.}
 
-\item{tol_low}{lowest value where live the search parameter lambda.}
+\item{lambda_tol}{lowest and uppest value where live the search parameter lambda.}
 
-\item{tol_upper}{uppest value where live the search parameter lambda.}
-
-\item{check}{if TRUE print a censoring percentage of new created database.}
+\item{verbose}{if TRUE print a censoring percentage of new created database.}
 
 \item{right}{if TRUE create right-censored data, else create left-censored}
 }

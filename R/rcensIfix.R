@@ -12,7 +12,7 @@
 #' @param interval_length length of interval
 #' @param n number of sample to create.
 #' @param theta Desired censoring percentage
-#' @param check if TRUE print a censoring percentage of new created database.
+#' @param verbose if TRUE print a censoring percentage of new created database.
 #'
 #' @return A list with sample data information: \tabular{ll}{
 #'    \code{sample_censored} \tab vector of censored sample \cr
@@ -37,7 +37,7 @@
 #' @author Daniel Saavedra Morales
 #' @export
 rcensIfix <- function(rdistrX ,param_X, interval_length,
-                   n = 1e04, theta = 1, check = TRUE){
+                   n = 1e04, theta = 1, verbose = FALSE){
 
 
   n1 = ceiling(n*theta) # Data con censura
@@ -64,7 +64,7 @@ rcensIfix <- function(rdistrX ,param_X, interval_length,
     censored[i, 2] = acum[index ]
 
   }
-  if (check){cat("Censorship percentage:",1 - (sum (delta) / n ))}
+  if (verbose){cat("Censorship percentage:",1 - (sum (delta) / n ))}
 
   return(list( "sample_censored" = censored,
                "sample_uncensored" = x,

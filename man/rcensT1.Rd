@@ -11,7 +11,7 @@ rcensT1(
   n = 10000,
   t_censored = -1,
   theta = 0.5,
-  check = TRUE,
+  verbose = FALSE,
   right = TRUE
 )
 }
@@ -28,7 +28,7 @@ rcensT1(
 
 \item{theta}{Desired censoring percentage.}
 
-\item{check}{if TRUE print a censoring percentage of new created database.}
+\item{verbose}{if TRUE print a censoring percentage of new created database.}
 
 \item{right}{if TRUE create right-censored data, else create left-censored}
 }

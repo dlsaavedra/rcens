@@ -17,7 +17,7 @@ source("R/tools.R")
 #' @param n number of sample to create.
 #' @param theta Desired censoring percentage
 #' @param n_mc number of sample use to estimate the moments of C, greater n_mc more accuracy.
-#' @param check if TRUE print a censoring percentage of new created database.
+#' @param verbose if TRUE print a censoring percentage of new created database.
 #' @param epsilon Parameter to estimate the number of visit (in [0,1]), shrink it only if the algorithm takes too long
 #'
 #' @return A list with sample data information: \tabular{ll}{
@@ -44,7 +44,7 @@ source("R/tools.R")
 
 rcensI <- function(rdistrX, rdistrC ,param_X, param_C,
                    n = 1e04, epsilon = .5, n_mc = 1e04,
-                   theta = 1, check = TRUE){
+                   theta = 1, verbose = FALSE){
 
   n1 = ceiling(n*theta) # Data con censura
   n2 = round((1-theta)*n) # Data no censurada
@@ -75,7 +75,7 @@ rcensI <- function(rdistrX, rdistrC ,param_X, param_C,
     censored[i, 2] = acum[index ]
 
   }
-  if (check){cat("Censorship percentage:",1 - (sum (delta) / n ))}
+  if (verbose){cat("Censorship percentage:",1 - (sum (delta) / n ))}
 
   return(list( "sample_censored" = censored,
               "sample_uncensored" = x,

@@ -12,7 +12,7 @@
 #' @param n        number of sample to create.
 #' @param t_censored time level censored.
 #' @param theta Desired censoring percentage.
-#' @param check if TRUE print a censoring percentage of new created database.
+#' @param verbose if TRUE print a censoring percentage of new created database.
 #' @param right if TRUE create right-censored data, else create left-censored
 #'
 #'
@@ -41,7 +41,7 @@
 #'
 rcensT1 <- function(rdistrX, param_X, qdistrX = NULL,
                     n = 1e04, t_censored = -1,
-                    theta = .5, check = TRUE, right = TRUE)
+                    theta = .5, verbose = FALSE, right = TRUE)
 {
 
    if (theta > 1 || theta < 0){
@@ -76,7 +76,7 @@ rcensT1 <- function(rdistrX, param_X, qdistrX = NULL,
     delta[x <= t_censored] = 0
     t[x <= t_censored] = t_censored
   }
-  if (check){cat("Censorship percentage:",1 - (sum (delta) / n ), "\n")}
+  if (verbose){cat("Censorship percentage:",1 - (sum (delta) / n ), "\n")}
 
   return(list("sample_censored" = t,
               "sample_uncensored" = x,

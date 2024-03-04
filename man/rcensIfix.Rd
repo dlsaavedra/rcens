@@ -10,7 +10,7 @@ rcensIfix(
   interval_length,
   n = 10000,
   theta = 1,
-  check = TRUE
+  verbose = FALSE
 )
 }
 \arguments{
@@ -25,7 +25,7 @@ First argument number of samples, next arguments in param_X.}
 
 \item{theta}{Desired censoring percentage}
 
-\item{check}{if TRUE print a censoring percentage of new created database.}
+\item{verbose}{if TRUE print a censoring percentage of new created database.}
 }
 \value{
 A list with sample data information: \tabular{ll}{

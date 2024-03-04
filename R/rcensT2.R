@@ -13,7 +13,7 @@
 #' If m_censored <= n, m_censored is estimate with the desired censoring percentage.
 #'
 #' @param theta Desired censoring percentage.
-#' @param check if TRUE print a censoring percentage of new created database.
+#' @param verbose if TRUE print a censoring percentage of new created database.
 #' @param right if TRUE create right-censored data, else create left-censored
 #'
 #' @return A list with sample data information: \tabular{ll}{
@@ -41,7 +41,7 @@
 
 rcensT2 <- function(rdistrX ,param_X,
                     n = 1e04, m_censored = -1,
-                    theta = .5, check = TRUE, right = TRUE)
+                    theta = .5, verbose = FALSE, right = TRUE)
 {
   if (theta > 1 || theta < 0){
     warning("theta is not between 0 and 1 ")
@@ -71,7 +71,7 @@ rcensT2 <- function(rdistrX ,param_X,
 
   t[(n - m_censored + 1): n] = t[n - m_censored]
 
-  if (check){cat("Censorship percentage:",1 - (sum (delta) / n ), "\n")}
+  if (verbose){cat("Censorship percentage:",1 - (sum (delta) / n ), "\n")}
 
   return(list("sample_censored" = t,
               "sample_uncensored" = sort(x),
