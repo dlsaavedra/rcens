@@ -2,8 +2,10 @@ Package: rcens
 Type: Package
 Title: Generate Sample Censoring
 Version: 0.1.0
-Author: Daniel Saavedra [aut, cre, cph]
-Authors@R: c(person("Daniel", "Saavedra", role = c("aut", "cre", "cph"), email = "dlsaavedra@uc.cl"))
+Author: Daniel Saavedra [aut, cre, cph] (<https://orcid.org/0000-0002-5084-6843>), Pedro Ramos [aut]
+Authors@R: c(person("Daniel", "Saavedra", role = c("aut", "cre", "cph"), 
+             email = "dlsaavedra@uc.cl", comment = c(ORCID = "0000-0002-5084-6843")), 
+             person(c("Pedro", "L"), "Ramos", role = c("aut")))
 Maintainer: Daniel Saavedra <dlsaavedra@uc.cl>
 Description: Provides functions to generate censored samples of type I, II and III, from any random sample generator. It also supplies the option to create left and right censorship. Along with this, the generation of samples with interval censoring is in the  testing phase, with two options of fixed length intervals and random lengths.
 License: MIT + file LICENSE
