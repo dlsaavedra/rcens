@@ -74,7 +74,7 @@ A BibTeX entry for LaTeX users is:
     author = {Daniel Saavedra and Pedro L Ramos},
     year = {2024},
     note = {R package version 0.1.0},
-    url = {https://CRAN.R-project.org/package=rcens},
+    url = {https://github.com/dlsaavedra/rcens},
   }
 ```
 
