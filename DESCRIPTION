@@ -1,7 +1,7 @@
 Package: rcens
 Type: Package
 Title: Generate Sample Censoring
-Version: 0.1.0
+Version: 0.1.1
 Author: Daniel Saavedra [aut, cre, cph] (<https://orcid.org/0000-0002-5084-6843>), Pedro Ramos [aut]
 Authors@R: c(person("Daniel", "Saavedra", role = c("aut", "cre", "cph"), 
              email = "dlsaavedra@uc.cl", comment = c(ORCID = "0000-0002-5084-6843")), 
