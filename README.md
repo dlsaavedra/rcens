@@ -6,7 +6,7 @@ This package provides functions to generate censored samples of type I, II and I
 
 ## Installation
 
-You can install [rcens](https://cran.r-project.org/web/packages/rcens/index.html) from CRAN via:
+You can install [rcens](https://CRAN.R-project.org/package=rcens) from CRAN via:
 
 ``` r
 install.packages("rcens")
@@ -73,7 +73,7 @@ A BibTeX entry for LaTeX users is:
     title = {rcens: Generate Sample Censoring},
     author = {Daniel Saavedra and Pedro L Ramos},
     year = {2024},
-    note = {R package version 0.1.0},
+    note = {R package version 0.1.1},
     url = {https://github.com/dlsaavedra/rcens},
   }
 ```

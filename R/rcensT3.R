@@ -4,7 +4,7 @@
 #' Generator of censored samples type III with right or left censoring,
 #'  given a generator of samples of the distribution X (rdistrX) with
 #'  parameters appended by the list param_X. Also accumulate function of distribution and generator sample
-#'  of distribution C (censoring) with parameters appended by the list param_C
+#'  of distribution C (censoring) with parameters appended by the list param_C.
 #'  In which, you can control the desired censorship percentage.
 #'
 #' @param rdistrX sample generator of distribution X. \cr
