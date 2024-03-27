@@ -1,4 +1,4 @@
-#Example Exponential - Uniform
+#Example Exponential - Fix Interval
 
 Data_Ifix = rcensIfix(rdistrX = rexp, interval_length = 2,
                    param_X = list("rate" = .5),
