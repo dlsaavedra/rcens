@@ -1,4 +1,5 @@
 library(survival)
+library(rcens)
 #source("R/rcensT3.R")
 #Example Weibull - Uniform----
 alpha = 2
@@ -20,12 +21,12 @@ Survival_CDF = Vectorize(function(x){ 1 - CDF_censored(x)})
 CDF_original= ecdf(Data$sample_uncensored)
 Survival_CDF_original = Vectorize(function(x){ 1 - CDF_original(x)})
 
-plot(Survival_CDF, col = "blue", xlim = c(0,2))
-title("Survival Curve")
-plot(Survival_CDF_original, col = "red", add= TRUE, xlim = c(0,2))
-lines(s1$time, s1$surv, col = "green", xlim = c(0,2))
-legend("topright",c("original","censured", "Survival_KM"),
-       col = c("red", "blue", "green"), lty = 1)
+plot(Survival_CDF, col = "blue", xlim = c(0,2), lwd = 3, ylab = "Survival", xlab = "X")
+title("Survival Curve Type III censorship")
+plot(Survival_CDF_original, col = "red", add= TRUE, xlim = c(0,2), lwd = 2)
+lines(s1$time, s1$surv, col = "green", xlim = c(0,2), lwd = 2)
+legend("topright",c("Original","Censured", "Survival_KM"),
+       col = c("red", "blue", "green"), lty = 1,  bty = "n")
 
 
 ## Left-Censored Plot KM
